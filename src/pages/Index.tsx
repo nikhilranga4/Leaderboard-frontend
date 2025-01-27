@@ -10,6 +10,7 @@ import { ThemeToggle } from "@/components/theme-toggle";
 import useConfetti from "@/hooks/use-confetti";
 import { User, HistoryEntry } from "@/types";
 import { api } from "@/lib/api";
+import { Trophy } from "lucide-react";
 
 const Index = () => {
   const [selectedUser, setSelectedUser] = useState<User | null>(null);
@@ -106,16 +107,18 @@ const Index = () => {
 
   return (
     <div className="container mx-auto px-4 py-8 min-h-screen">
-      {/* Adjust this flex container to add spacing on mobile */}
-      <div className="flex justify-between items-center mb-8 relative">
-        <h1 className="text-4xl font-bold">Points Leaderboard</h1>
-        <div className="absolute top-4 right-4 z-50 md:relative">
-          <ThemeToggle />
+      <div className="flex justify-between items-center mb-8">
+        <div className="flex items-center gap-3">
+          <Trophy className="h-8 w-8 text-primary animate-bounce" />
+          <h1 className="text-4xl font-bold bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent">
+            Points Leaderboard
+          </h1>
         </div>
+        <ThemeToggle />
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        <Card className="glass-card p-6 lg:col-span-2">
+        <Card className="glass-card p-6 lg:col-span-2 animate-fade-in">
           <div className="flex flex-col md:flex-row gap-4 mb-6">
             <div className="flex-1">
               <UserSelector
@@ -127,7 +130,7 @@ const Index = () => {
             <Button
               size="lg"
               onClick={handleClaimPoints}
-              className="animate-scale-in bg-primary hover:bg-primary/90 text-primary-foreground"
+              className="animate-scale-in bg-primary hover:bg-primary/90 text-primary-foreground font-semibold"
               disabled={!selectedUser}
             >
               Claim Points
@@ -140,13 +143,21 @@ const Index = () => {
         </Card>
 
         <div className="flex flex-col gap-8">
-          <Card className="glass-card p-6">
-            <h2 className="text-xl font-semibold mb-4">Add New User</h2>
+          <Card className="glass-card p-6 animate-slide-in">
+            <h2 className="text-xl font-semibold mb-4 flex items-center gap-2">
+              <span className="bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent">
+                Add New User
+              </span>
+            </h2>
             <AddUserForm onSuccess={fetchLeaderboard} />
           </Card>
 
-          <Card className="glass-card p-6">
-            <h2 className="text-xl font-semibold mb-4">Points History</h2>
+          <Card className="glass-card p-6 animate-slide-in">
+            <h2 className="text-xl font-semibold mb-4 flex items-center gap-2">
+              <span className="bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent">
+                Points History
+              </span>
+            </h2>
             <HistoryTimeline history={history} />
           </Card>
         </div>
